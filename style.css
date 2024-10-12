@@ -644,7 +644,7 @@ ul, li{
 }
 
 .tab input:checked ~ .tab__content {
-    max-height: 10rem;
+    max-height: 100%;
 }
 
 .accordion {
