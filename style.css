@@ -695,7 +695,7 @@ ul, li{
 /* SLIDER */
 
 .slider {
-    --totSlides:14;
+    --totSlides:8;
     --slideWidth: 450px;
     --animationSpeed: calc(5s * var(--totSlides));
     margin: auto;
