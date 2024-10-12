@@ -945,7 +945,7 @@ ul, li{
     }
     
     .wave {
-        margin: 32px 25px !important; 
+        margin: 0 !important; 
     }
 
     #restaurant h2 {
