@@ -1,29 +1,3 @@
-
-.slideanim {
-    visibility:hidden;
-    visibility:visible\9;/*For old IE browsers IE6-8 */
-}
-.slideanim.slide {                  
-    visibility: visible;                  
-    animation: slide 1s;
-}
-.slideanim::after {
-    /* useful when its child elements are float:left; */
-    content: "";
-    display: table;
-    clear: both;
-}
-@keyframes slide {
-    0% {
-        opacity: 0;
-        transform: translateY(50%);
-    } 
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    } 
-}
-
 body {
     background: #ede3dc;
     font-family: "Afacad Flux", sans-serif !important;
@@ -721,7 +695,7 @@ ul, li{
 /* SLIDER */
 
 .slider {
-    --totSlides:8;
+    --totSlides:14;
     --slideWidth: 450px;
     --animationSpeed: calc(5s * var(--totSlides));
     margin: auto;
@@ -803,6 +777,31 @@ ul, li{
     border: none;
     background-color: #cedba7;
     color: #111;
+}
+
+.slideanim {
+    visibility:hidden;
+    visibility:visible\9;/*For old IE browsers IE6-8 */
+}
+.slideanim.slide {                  
+    visibility: visible;                  
+    animation: slide 1s;
+}
+.slideanim::after {
+    /* useful when its child elements are float:left; */
+    content: "";
+    display: table;
+    clear: both;
+}
+@keyframes slide {
+    0% {
+        opacity: 0;
+        transform: translateY(50%);
+    } 
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    } 
 }
 
 
