@@ -64,6 +64,9 @@
         <button id="nextButton" class="button">Утре ➡</button>
     </div>
 
+    <button id="installButton" style="display: none;">Install App</button>
+
+
     <!-- Include the words.js file -->
     <script src="words.js"></script>
 
@@ -145,6 +148,24 @@
                 console.log("Service Worker Registered");
             });
         }
+
+        let deferredPrompt;
+window.addEventListener("beforeinstallprompt", event => {
+    event.preventDefault();
+    deferredPrompt = event;
+    document.getElementById("installButton").style.display = "block";
+});
+
+document.getElementById("installButton").addEventListener("click", () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(choice => {
+            console.log(choice.outcome === "accepted" ? "App installed!" : "Installation dismissed");
+            deferredPrompt = null;
+        });
+    }
+});
+
     </script>
 </body>
 </html>
