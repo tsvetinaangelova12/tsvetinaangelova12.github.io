@@ -2,7 +2,8 @@ const cacheName = "word-app-v1";
 const assets = [
     "./index.html",
     "./words.js",
-    "./icon.jpg"
+    "./icon1.jpg",
+    "./icon2.jpg"
 ];
 
 self.addEventListener("install", event => {
