@@ -1,0 +1,21 @@
+{
+    "name": "German Word of the Day",
+    "short_name": "WordApp",
+    "start_url": "./word.html",
+    "display": "standalone",
+    "background_color": "#f4f4f4",
+    "theme_color": "#007BFF",
+    "icons": [
+      {
+        "src": "icon.jpg",
+        "type": "image/jpg",
+        "sizes": "192x192"
+      },
+      {
+        "src": "icon.jpg",
+        "type": "image/jpg",
+        "sizes": "512x512"
+      }
+    ]
+  }
+  

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <title>Немска дума всеки ден!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        #carousel {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .word-box h2 {
+            margin: 0 0 10px;
+        }
+        .word-box p {
+            margin: 5px 0;
+        }
+        .date {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        #navigation {
+            margin-top: 20px;
+        }
+        .button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Дума на деня</h1>
+    <div id="carousel">
+        <div id="word-box" class="word-box">
+            <!-- Word details will appear here -->
+        </div>
+        <div id="message" style="display: none; color: #555; font-style: italic;"></div>
+    </div>
+    <div id="navigation">
+        <button id="prevButton" class="button">⬅ Вчера</button>
+        <button id="nextButton" class="button">Утре ➡</button>
+    </div>
+
+    <!-- Include the words.js file -->
+    <script src="words.js"></script>
+
+    <!-- Main script -->
+    <script>
+        // Get the current day number (1-based)
+        const startDate = new Date(2024, 10, 22); // Adjust to your start date (Year, Month - 1, Day)
+        const today = new Date();
+        const dayDifference = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+
+        // Ensure the current index starts at today's word
+        let currentIndex = Math.min(dayDifference, words.length - 1); // Prevent going out of bounds
+
+        const wordBox = document.getElementById("word-box");
+        const message = document.getElementById("message");
+        const prevButton = document.getElementById("prevButton");
+        const nextButton = document.getElementById("nextButton");
+
+        // Calculate the date for a given index
+        function getDateForIndex(index) {
+            const wordDate = new Date(startDate);
+            wordDate.setDate(startDate.getDate() + index); // Add index days to startDate
+            // Format date in Bulgarian
+            return wordDate.toLocaleDateString("bg-BG", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            });
+        }
+
+        // Update the display based on the current index
+        function updateDisplay() {
+            if (currentIndex <= dayDifference) {
+                const word = words[currentIndex];
+                const wordDate = getDateForIndex(currentIndex);
+                wordBox.innerHTML = `
+                    <p class="date">${wordDate}</p>
+                    <h2>${word.german}</h2>
+                    <p><strong>Превод:</strong> ${word.bulgarian}</p>
+                    <p><strong>Изговор:</strong> ${word.pronunciation}</p>
+                `;
+                message.style.display = "none";
+            } else if (currentIndex === dayDifference + 1) {
+                const wordDate = getDateForIndex(currentIndex);
+                wordBox.innerHTML = `
+                    <p class="date">${wordDate}</p>
+                `;
+                message.style.display = "block";
+                message.textContent = "Върни се утре за следващата дума!";
+            }
+
+            // Disable buttons based on currentIndex and limits
+            prevButton.disabled = currentIndex === 0;
+            nextButton.disabled = currentIndex >= dayDifference + 1; // Limit to today + 1
+        }
+
+        // Navigate to the previous word
+        prevButton.addEventListener("click", () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateDisplay();
+            }
+        });
+
+        // Navigate to the next word
+        nextButton.addEventListener("click", () => {
+            if (currentIndex < dayDifference + 1) { // Allow moving up to today + 1
+                currentIndex++;
+                updateDisplay();
+            }
+        });
+
+        // Initial display
+        updateDisplay();
+
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("sw.js").then(() => {
+                console.log("Service Worker Registered");
+            });
+        }
+    </script>
+</body>
+</html>
