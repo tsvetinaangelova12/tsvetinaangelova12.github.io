@@ -1,6 +1,6 @@
 const cacheName = "word-app-v1";
 const assets = [
-    "./word.html",
+    "./index.html",
     "./words.js",
     "./icon.jpg"
 ];

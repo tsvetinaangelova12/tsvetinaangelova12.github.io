@@ -1,7 +1,7 @@
 {
     "name": "German Word of the Day",
     "short_name": "WordApp",
-    "start_url": "./word.html",
+    "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#f4f4f4",
     "theme_color": "#007BFF",
