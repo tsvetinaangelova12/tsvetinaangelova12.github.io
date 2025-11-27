@@ -1,7 +1,7 @@
 {
   "name": "agenda-maker",
   "version": "0.1.0",
-  "homepage": "http://tsvetinaangelova12.github.io",
+  "homepage": "http://tsvetinaangelova12.github.io/agenda-maker-main",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
